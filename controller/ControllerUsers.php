@@ -12,12 +12,11 @@ switch($action) {
     default:
     //si l'action est inconnue, on effectue 'readAll'
 
-    case "readAll" :
+    case "home" :
     //initialisation des variables pour la vue
-    $tab_util = ModelUsers::selectAll();
     //chargement de la vue
-    $view = 'list';
-    $pagetitle = "Liste des utilisateurs";
+    $view = 'home';
+    $pagetitle = "Home page";
     break;
 
 }

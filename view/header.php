@@ -9,7 +9,22 @@
         <nav>
             <ul>
                 <li>
-                    <a href="?controller=users">Gestion des utilisateurs</a>
+                    <a href="?controller=users">Accueil</a>
+                </li>
+                <li>
+                    <a href="?controller=users">Recommandations</a>
+                </li>
+                <li>
+                    <a href="?controller=users">Like</a>
+                </li>
+                <li>
+                    <a href="?controller=users">Listing</a>
+                </li>
+                <li>
+                    <a href="?controller=users">Recherche</a>
+                </li>
+                <li>
+                    <a href="?controller=users">Profil</a>
                 </li>
             </ul>
         </nav>

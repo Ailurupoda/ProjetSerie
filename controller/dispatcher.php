@@ -1,5 +1,8 @@
 <?php
 
+require 'Config/Session.php';
+session_start();
+
 function myGet($nomvar) {
     if(isset($_GET[$nomvar])){
         return $_GET[$nomvar];
@@ -9,9 +12,6 @@ function myGet($nomvar) {
     }
     return null;
 }
-
-//session_name("unechaineàmoi")
-session_start();
 
 define('MODEL_PATH', ROOT . DS . 'model' . DS);
 

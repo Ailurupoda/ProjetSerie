@@ -6,6 +6,29 @@
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
+        <div>
+                <div>
+                
+                <?php if (empty($_SESSION['mail'])) {
+                        echo<<<connecter
+                <a href="?action=connect&controller=users">Se connecter </a>
+                <a href="?action=create&controller=users">S'inscrire </a>
+connecter;
+            }
+            ?>
+                
+                <?php if (!empty($_SESSION['mail'])) {
+                    $logtemp = $_SESSION['mail'];
+                    echo<<<deconnecter
+                <a href ='?action=read&controller=users&mail=$logtemp'>$logtemp</a>
+                <a href ='?action=deconnect&controller=users'>Se déconnecter</a>
+deconnecter;
+                }
+                ?>
+                </div>
+                </div>              
+
+        <div>
         <nav>
             <ul>
                 <li>

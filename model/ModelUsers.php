@@ -4,7 +4,7 @@ require_once 'Model.php';
 
 class ModelUsers extends Model {
     protected static $table = "users";
-    protected static $primary_index = "idUser";
+    protected static $primary_index = "mail";
 
     public static function isAdmin($data) {
         try {

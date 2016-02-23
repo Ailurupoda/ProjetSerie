@@ -5,7 +5,7 @@ echo <<< EOT
                 <legend>$label </legend>
                 <p>
                     <label for="id_mail">Mail :</label>
-                    <input type="text" value="$mail" name="mail" id="mail" required/>
+                    <input type="text" value="$m" name="mail" id="mail" required/>
                 </p>
                 <p>
                     <label for="id_pw">Mot de passe :</label>

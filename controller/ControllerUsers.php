@@ -31,7 +31,7 @@ switch($action) {
         break;
 
 case "create":
-        if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] != 1)) {
+        if (!empty($_SESSION['mail'])  && ($_SESISON['admin'] != 1)) {
             $view = "error";
             $pagetitle = "Erreur";
             $msg = "Vous êtes déjà connecté";
@@ -44,7 +44,7 @@ case "create":
         $label = "Créer";
         $login_status = "required";
         $pagetitle = "Création d'un utilisateur";
-        $submit = "Création";
+        $submit = "S'inscrire";
         $act = "save";
         $view = "create";
         break;
@@ -56,7 +56,7 @@ case "create":
             $msg = "Tous les champs n'ont pas été remplis";
             break;
         }
-        if(myGet('pwd') != myGet('pwd2')) {
+        if(myGet('password') != myGet('password2')) {
             $view = 'error';
             $pagetitle = 'Erreur';
             $msg = "Les mots de passe ne correspondent pas";
@@ -64,12 +64,12 @@ case "create":
         }
         $data = array(
             "mail" => myGet("mail"),
-            "password" => hash('sha256', myGet('pwd') . Conf::getSeed())
+            "password" => hash('sha256', myGet('password') . Conf::getSeed())
         );
 
         ModelUsers::insert($data);
         // Initialisation des variables pour la vue
-        $mail = myGet('mail');
+        $m = myGet('mail');
         $tab_util = ModelUsers::selectAll();
         if (Session::is_admin()) {
             $view = "home";
@@ -113,7 +113,7 @@ case "create":
         break;
 
     case "connect":
-        $mail = "";
+        $m = "";
         $ConnectPassword = "";
         $submit = "Connexion";
         $act = "connected";
@@ -135,7 +135,7 @@ case "create":
         $pwd = $u->password;
 
         if (is_null(myGet('mail') || is_null(myGet('ConnectPassword'))) || $pwd != hash('sha256', myGet('ConnectPassword') . Conf::getSeed())) {
-            $mail = "";
+            $m = "";
             $ConnectPassword = "";
             $submit = "Connexion";
             $act = "connected";

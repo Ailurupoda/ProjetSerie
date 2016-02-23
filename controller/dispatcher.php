@@ -26,14 +26,17 @@ else
     $action = "readAll";
 
 switch ($controller) {
-    case "users":
-        require_once "ControllerUsers.php";
-        break;
+    
         
     case "series" :
         require_once "ControllerSeries.php";
         break;
 
     default:
+
+    case "users":
+        require_once "ControllerUsers.php";
+        break;
+        
 }
 ?>

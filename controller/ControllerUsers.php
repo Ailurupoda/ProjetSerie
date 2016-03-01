@@ -123,7 +123,19 @@ case "create":
         break;
 
     case "connected":
+
+        if (is_null(myGet('mail'))){
+            $view = "error";
+            $pagetitle = "Erreur";
+            $msg = "Aucun identifiant saisie";
+            break;  
+        }
         $data = array("mail" => myGet('mail'));
+
+        $i = ModelUsers::getId($data);
+        
+        $data  =  $i;
+      
         if (COUNT(ModelUsers::selectWhere($data))==0) {
             $view = "error";
             $pagetitle = "Erreur";
@@ -131,9 +143,10 @@ case "create":
             break;         
         }
         $u = ModelUsers::select($data);
+        $i = $u->idUser;
         $m = $u->mail;
         $pwd = $u->password;
-
+      
         if (is_null(myGet('mail') || is_null(myGet('ConnectPassword'))) || $pwd != hash('sha256', myGet('ConnectPassword') . Conf::getSeed())) {
             $m = "";
             $ConnectPassword = "";

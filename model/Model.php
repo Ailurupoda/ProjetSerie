@@ -32,7 +32,7 @@ class Model {
         }
     }
 
-    public static function selectAll() {
+    public static function selectAll() { // afficher tous les éléments de la table
         try {
             $sql = "SELECT * FROM " . static::$table;
             $req = self::$pdo->query($sql);
@@ -44,7 +44,7 @@ class Model {
         }
     }
 
-    public static function select($data) {
+    public static function select($data) { //afficher les éléments de la table où la clé primaire est égale à
         try {
             $table = static::$table;
             $primary = static::$primary_index;

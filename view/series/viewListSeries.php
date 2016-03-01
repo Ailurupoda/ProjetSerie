@@ -7,15 +7,36 @@ function view1($ts){
 		echo <<< EOT
 		<li> 
 			La série identifié par $idS porte le titre : $t
-		</li>
+		
 EOT;
+		if (!empty($_SESSION['mail'])){
+
+			require_once MODEL_PATH . 'ModelUsers.php';
+			require_once MODEL_PATH . 'ModelLiked.php';
+    		$data = array("mail" => $_SESSION['mail']);
+    		$i = ModelUsers::getId($data);
+    		$data = array(
+    		"idUser" => $i["idUser"],
+    		"idSerie" => $idS
+    		);
+    		$exists = ModelLiked::existId($data);
+			if($exists > 0){
+				echo "<a href ='?action=unLike&controller=liked&idSerie=$idS'>UNLIKE</a>";
+				
+			}
+			else {
+				echo "<a href ='?action=like&controller=liked&idSerie=$idS'>LIKE</a>";
+			}
+			
+		}
+		echo "</li>";
 	}
-}	       
+}      
 ?>
         <!-- Une variable $tab_util est donnée -->    
         <div>
             <h1>Liste des séries:</h1>
             <ol>
-            <?php view1($tab_util); ?>
+            <?php view1($tab_serie); ?>
             </ol>
         </div>

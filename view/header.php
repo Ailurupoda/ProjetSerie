@@ -38,21 +38,34 @@ deconnecter;
                     <a href="?controller=users">Recommandations</a>
                 </li>
                 
-                    <?php if (!empty($_SESSION['mail'])) {
+                    <?php  if (!empty($_SESSION['mail'])) {
                     echo "<li>
                     <a href='?action=readAll&controller=liked'>Like</a>
                         </li>";
                     }
                     ?>
+
+                    </li>
                 
+                    <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
+                    echo "<li>
+                    <a href='?action=create&controller=series'>Ajouter une série</a>
+                        </li>";
+                    }
+                    ?>
                 <li>
                     <a href="?action=readAll&controller=series">Listing</a>
                 </li>
                 <li>
                     <a href="?controller=users">Recherche</a>
                 </li>
-                <li>
-                    <a href="?action=update&controller=users">Profil</a>
-                </li>
+                <?php ;if (!empty($_SESSION['mail']) ) {
+                    echo "<li>
+                    <a href='?action=profil&controller=users'>Profil</a>
+                        </li>";
+                    }
+                    ?>
+                    
+                
             </ul>
         </nav>

@@ -7,42 +7,43 @@ require_once MODEL_PATH . 'Model' . ucfirst($controller) . '.php';
 
 switch($action) {
 
-    case "update":
-        if (is_null(myGet('mail'))) {
+    case "profil":
+        if (empty($_SESSION['mail'])) {
             $view = "error";
             $pagetitle = "Erreur";
-            $msg = "Mail non trouvé";
+            $msg = "Vous n'êtes pas connecté";
             break;
         }
+        
+        $data  =  ModelUsers::getId(array("mail" => $_SESSION['mail']));
 
-        $data = array("mail" => myGet('mail'));
-        $u = ModelUser::select($data);
+        $u = ModelUsers::select($data);
 
         $m = $u->mail;
         $pwd = $u->password;
+        $birth = $u->birth;
         $adm = $u->admin;
-        $r = "readonly";   
-        $label = "Modifier";
-        $login_status = "readonly";
-        $pagetitle = "Modification d'un utilisateur";
+        $r = "readonly"; 
+        $label = "Profil";
+        $pagetitle = "Profil";
         $submit = "Mettre à jour";
         $act = "updated";
-        $view = "create";
+        $view = "profil";
         break;
 
 case "create":
-        if (!empty($_SESSION['mail'])  && ($_SESISON['admin'] != 1)) {
+        if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] != 1)) {
             $view = "error";
             $pagetitle = "Erreur";
-            $msg = "Vous êtes déjà connecté";
+            $msg = "Vous ne pouvez pas vous inscrire car vous êtes déjà connecté";
             break;
         }
         $m = "";
         $pwd = "";
+        $birth = "";
         $adm = "";
         $r = "required";
         $label = "Créer";
-        $login_status = "required";
         $pagetitle = "Création d'un utilisateur";
         $submit = "S'inscrire";
         $act = "save";
@@ -56,6 +57,20 @@ case "create":
             $msg = "Tous les champs n'ont pas été remplis";
             break;
         }
+        $curDate = date('Y-m-d');
+        if (($curDate -myGet('birth')) < 17) {
+            $view = "error";
+            $pagetitle = "Erreur";
+            $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
+            break;
+        }else{
+        if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
+            $view = "error";
+            $pagetitle = "Erreur";
+            $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
+            break;
+            }     
+        } 
         if(myGet('password') != myGet('password2')) {
             $view = 'error';
             $pagetitle = 'Erreur';
@@ -64,7 +79,8 @@ case "create":
         }
         $data = array(
             "mail" => myGet("mail"),
-            "password" => hash('sha256', myGet('password') . Conf::getSeed())
+            "password" => hash('sha256', myGet('password') . Conf::getSeed()),
+            "birth" => myGet("birth")
         );
 
         ModelUsers::insert($data);
@@ -88,6 +104,8 @@ case "create":
         
 
     case "updated":
+   
+
         if (is_null(myGet('mail')) || is_null(myGet('pwd')) || is_null(myGet('pwd2')) ){ 
             $view = "error";
             $pagetitle = "Erreur";
@@ -100,16 +118,28 @@ case "create":
             $msg = "Les mots de passe ne correspondent pas";
             break;
         }
+
+        $id  =  ModelUsers::getId(array("mail" => myGet('mail')));
         $data = array(
-            "mail" => myGet("mail"),
-            "admin" => myGet("admin"),
-            "pwd" => hash('sha256', myGet('pwd') . Conf::getSeed())
+            "idUser" => $id['idUser'],
+            "birth" => myGet('birth'),
+            "mail" => myGet('mail'),
+            "password" => hash('sha256', myGet('pwd') . Conf::getSeed())
         );
+
         ModelUsers::update($data);
-        $Login = myGet('mail');
-        $tab_util = ModelUsers::selectAll();
-        $view = "updated";
-        $pagetitle = "Liste des Utilisateurs";
+
+        $u = ModelUsers::select($id);
+
+        $m = $u->mail;
+        $pwd = $u->password;
+        $birth = $u->birth;
+        $adm = $u->admin;
+        $r = "readonly";   
+        $pagetitle = "Profil";
+        $submit = "Mettre à jour";
+        $act = "updated";
+        $view = "profil";
         break;
 
     case "connect":
@@ -130,12 +160,9 @@ case "create":
             $msg = "Aucun identifiant saisie";
             break;  
         }
-        $data = array("mail" => myGet('mail'));
 
-        $i = ModelUsers::getId($data);
-        
-        $data  =  $i;
-      
+         $data  =  ModelUsers::getId(array("mail" => myGet('mail')));
+    
         if (COUNT(ModelUsers::selectWhere($data))==0) {
             $view = "error";
             $pagetitle = "Erreur";

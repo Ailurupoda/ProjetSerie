@@ -7,10 +7,6 @@ require_once MODEL_PATH . 'Model' . ucfirst($controller) . '.php';
 
 switch($action) {
 
-    
-
-
-
     default:
     //si l'action est inconnue, on effectue 'readAll'
 

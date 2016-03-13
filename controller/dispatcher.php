@@ -126,6 +126,10 @@ switch ($controller) {
         require_once "ControllerSeries.php";
         break;
 
+    case "liked" :
+        require_once "ControllerLiked.php";
+        break;
+
     default:
 
     case "users":

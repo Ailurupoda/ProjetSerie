@@ -5,5 +5,5 @@
         	echo "Guest !";
         }
         else echo myGet('mail');
-*/
+        */
         ?>

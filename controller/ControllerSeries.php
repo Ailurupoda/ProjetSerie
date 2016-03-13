@@ -7,6 +7,14 @@ require_once MODEL_PATH . 'Model' . ucfirst($controller) . '.php';
 
 switch($action) {
 
+<<<<<<< HEAD
+
+    default:
+    //si l'action est inconnue, on effectue 'readAll'
+    case "readAll" :
+    //initialisation des variables pour la vue
+    $tab_serie = ModelSeries::selectAll();
+=======
     default:
     //si l'action est inconnue, on effectue 'readAll'
 
@@ -123,6 +131,7 @@ switch($action) {
     case "readAll":
     //initialisation des variables pour la vue
     $tab_series = ModelSeries::selectAll();
+>>>>>>> e12fef31b36595fe53afa4af976b52d2a4ee40da
     //chargement de la vue
     $view = "list";
     $pagetitle = "Listing";

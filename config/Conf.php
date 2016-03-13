@@ -6,7 +6,7 @@ class Conf {
         'hostname' => 'localhost',  // infolimon (ou localhost)
         'database' => 'nextwatch', // votre login dans notre cas
         'login' => 'root',
-        'password' => ''
+        'password' => 'pandas'
     );
     
     private static $debug = true;

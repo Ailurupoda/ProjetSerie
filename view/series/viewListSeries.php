@@ -37,6 +37,10 @@ EOT;
         <div>
             <h1>Liste des séries:</h1>
             <ol>
+<<<<<<< HEAD
             <?php view1($tab_serie); ?>
+=======
+            <?php view1($tab_series); ?>
+>>>>>>> e12fef31b36595fe53afa4af976b52d2a4ee40da
             </ol>
         </div>

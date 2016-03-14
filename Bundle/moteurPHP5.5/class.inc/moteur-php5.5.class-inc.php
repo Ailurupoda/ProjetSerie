@@ -2,12 +2,14 @@
 /*
 Class Name: SearchEnginePOO
 Creator: Mathieu Chartier
-Modficators: Quentin Vassy-Copin
 Website: http://blog.internet-formation.fr/2013/09/moteur-de-recherche-php-objet-poo-complet-pagination-surlignage-fulltext/
 Note: PHP 5.5 compatible
 Version: 2.4
 Date: 15 juillet 2015
-Edition : 10/03/2016
+*/
+/*
+Modifié par :  Quentin Vassy-Copin
+Date : 		   15/01/2015
 */
 ?>
 
@@ -65,7 +67,7 @@ class moteurRecherche {
 	/*-- 8. $exact (true/false) pour une recherche exacte ou d'un ou plusieurs des mots --*/
 	/*-- 9. $accent (true/false) faire des recherches sans accent si la BDD le permet ----*/
 	/*------------------------------------------------------------------------------------*/
-	public function __construct($bdd = '', $champ = '', $table = '', $typeRecherche = 'regexp', $stopWords = array(), $exclusion = '3', $encoding = 'utf-8', $exact = 'exact', $accent = true) {
+	public function __construct($bdd = '', $champ = '', $table = '', $typeRecherche = '', $stopWords = array(), $exclusion = '2', $encoding = 'utf8', $exact = 'true', $accent = '') {
 		$this->db			= $bdd;
 		$this->requete		= trim($champ);
 		$this->tableBDD		= $table;
@@ -97,14 +99,11 @@ class moteurRecherche {
 			// Récupère les mots qui ne sont pas entre guillemets dans un tableau
 			$sansExpressions = str_ireplace($entreGuillemets[0],"",$champ);
 			$motsSepares = explode(" ",$sansExpressions);
-
 			// Récupération des mots pour la correction des résultats !
 			$totalResults = array_merge($entreGuillemets[0], $motsSepares);
-			//print_r($totalResults);
 		} else {
 			$motsSepares = explode(" ",$champ);
 			$totalResults = explode(" ",$champ); // Utile pour la correction des résultats !
-			//print_r($totalResults);
 		}
 		
 		// Enregistre la liste des mots avant "nettoyage" de la requête (stop words, etc.)
@@ -317,7 +316,7 @@ class moteurRecherche {
 			
 			if($this->countWords > 1) {
 				for($i=1; $i < $this->countWords; $i++) {
-					$query .= $operateur." (".$colonnesWhere[0].$this->requestKey($i);
+					$query .= $operateurGroupe." (".$colonnesWhere[0].$this->requestKey($i);
 					if($nbColumn > 1) {
 						for($nb=1; $nb < $nbColumn; $nb++) {
 							$query .= $operateurGroupe." ".$colonnesWhere[$nb].$this->requestKey($i);
@@ -726,7 +725,7 @@ class moteurRecherche {
 		foreach($motsSepares as $motseul) {
 			$results[] = $motseul;
 		}
-		
+
 		// Si le tableau des mots et expressions n'est pas vide, alors on cherche... (sinon pas de résultats !)
 		if(!empty($results)) {
 			// Nettoie chaque champ pour éviter les risques de piratage...
@@ -906,7 +905,7 @@ class moteurRecherche {
 /*-- 4. Coordination pour le nb de résultats par page
 /*-------------------------------------------------------------------*/
 class affichageResultats extends moteurRecherche {
-	public function nbResultats($illimite = false, $wordsResults = array("résultat", "résultats"), $phrase = 'pour votre recherche', $coord = " à ") {
+	public function nbResultats($illimite = false, $wordsResults = array("résultat", "résultats"), $phrase = 'pour votre recherche : ', $coord = " à ") {
 		if($illimite == true) {
 			if(parent::nbResults() < 2) {
 				$res = " ".$wordsResults[0];	

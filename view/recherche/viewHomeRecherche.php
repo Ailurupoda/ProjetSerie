@@ -4,7 +4,7 @@ function viewR($cs){
     foreach($cs as $r) {
         $occ = $r->occ;
         $titre = $r->titre;
-        
+
         echo <<< EOT
         <li> 
             Trouvé $occ fois dans la série $titre.
@@ -109,7 +109,11 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
  
                 // Résultats de recherche à afficher (à personnaliser)
                 //$texte  = "<br/>Mot clé: ".$key['word']."<br/>";
-                $texte = "<br/>Nombre d'occurences du mot ".$key['word']." trouvées dans toutes les séries: ".$key['nbOcc']."<br/>";
+
+                $texte = "Le mot ";
+                $texte .= $key['word'];
+                $texte .= " à trouvées a été ";
+                $texte .= $key['nbOcc']." fois.<br/>";
 
                 /*
                 Objet pour surligner les mots recherchés si nécessaire
@@ -164,20 +168,36 @@ Lancement de la méthode de pagination
 */
 $moteur->moteurPagination($page, 'p');
 }
-
     if (($moteurR == "") && $action != "initial") {
         echo "Le champ de recherche n'a pas été rempli.";
     }else{
-        if (isset($tab_rchch)) {
-?>
-            <div>
-                <ul>
-                    <?php viewR($tab_rchch); ?>
-                </ul>
-            </div>
-<?php
+        if (isset($tab_rchch)&&!empty($tab_rchch)) {
+            echo "<div>";
+                //var_dump($tab_rchch);
+                foreach ($tab_rchch as $motRecherche => $tabUneDimension) {
+                    echo "_________________________________________________<br/><br/>";
+                    echo "<ol>";
+                    if (count($tabUneDimension)!=0) {
+                        echo "<b>".$motRecherche."</b> à été trouvé dans ".count($tabUneDimension)." séries : <br/>";
+                        //var_dump($tabUneDimension);
+                        //Le tableau est constitué d'objets de type stdclass                
+                        foreach ($tabUneDimension as $valeur) {
+                            echo "<ul><li>";
+                                echo $valeur->occ;
+                                echo " fois dans ";
+                                echo $valeur->titre;
+                                echo "<br/>";
+                            echo "</li></ul>";
+                        }
+                    }else{
+                        echo "<em><b>Erreur</b> : le mot <b>".$motRecherche."</b> n'a été trouvé dans aucune série.</em>";
+                    }
+                    echo "</ol>";
+                }
+                echo "_________________________________________________";
+            echo "</div>";
         }else{
-
+            echo "<br/><em>Erreur :</em> Aucune série correspondante.";
         }
 }
 ?>

@@ -146,15 +146,32 @@ class Model {
             $table = static::$table;
             $table2 = static::$table2;
             $table3 = static::$table3;
-            $mrch = $data['mot'];
-            //foreach ($data as $key => $value){}
 
-            $sql = "SELECT sk.nbOccSerie as occ, s.title as titre FROM $table k, $table2 sk, $table3 s WHERE k.word='$mrch' AND s.idSerie=sk.idSerie";
-            // Preparation de la requete
-            $req = self::$pdo->prepare($sql);
-            // execution de la requete
-            $req->execute($data);
-            return $req->fetchAll(PDO::FETCH_OBJ);
+            $sql = array();
+            $req = array();
+            $resultat = array();
+
+            $mrch = $data['mot'];
+            $mrchE = explode(' ', $mrch);
+            
+            //DEBUGG***********
+            //var_dump($mrchE);
+            //FIN DEBUGG*******
+
+            //Pour chaque mot retourné, on réalise une requête.
+            foreach ($mrchE as $cle => $valeur) {
+
+                $sql[$cle] = "SELECT sk.nbOccSerie as occ, s.title as titre FROM $table k, $table2 sk, $table3 s WHERE k.word='$valeur' AND k.idWord=sk.idWord AND sk.idSerie=s.idSerie";
+
+                // Preparation de la requete
+                $req[$cle] = self::$pdo->prepare($sql[$cle]);
+                // execution de la requete
+                $req[$cle]->execute($data);
+                //On concaténe le résultat -> l'indice du tableau de résultat permet de retrouver la correspondance mot/resultats.
+                $resultat[$valeur] = $req[$cle]->fetchAll(PDO::FETCH_OBJ);
+                }
+                //var_dump($resultat);
+                return $resultat;
 
         }catch (PDOException $e) {
             echo $e->getMessage();

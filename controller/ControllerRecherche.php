@@ -13,11 +13,16 @@ switch($action) {
             $moteurR = $_GET['moteur'];
         }else{$moteurR = "";}
 
-        $act = "initial";
+        $act = "rechercher";
         $view = "home";
         $pagetitle = "Recherche";
 
         $data = array("mot" => $moteurR);
+      
+        //DEBUGG**********
+        //var_dump($data);
+        //FIN DEBUGG******
+
         $tab_rchch = ModelRecherche::selectr($data);
         break;
 

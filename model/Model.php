@@ -141,6 +141,26 @@ class Model {
         }
     }
 
+    public static function selectr($data) {
+        try {     
+            $table = static::$table;
+            $table2 = static::$table2;
+            $table3 = static::$table3;
+            $mrch = $data['mot'];
+            //foreach ($data as $key => $value){}
+
+            $sql = "SELECT sk.nbOccSerie as occ, s.title as titre FROM $table k, $table2 sk, $table3 s WHERE k.word='$mrch' AND s.idSerie=sk.idSerie";
+            // Preparation de la requete
+            $req = self::$pdo->prepare($sql);
+            // execution de la requete
+            $req->execute($data);
+            return $req->fetchAll(PDO::FETCH_OBJ);
+
+        }catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la BDD ");}
+    }
+
 }
 
 // On initiliase la connexion $pdo un fois pour toute

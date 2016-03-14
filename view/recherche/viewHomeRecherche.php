@@ -1,5 +1,18 @@
- <?php  echo "<p>Recherche de series par mots clés: </p>"; ?>
+ <?php  
+
+function viewR($ts){
+    foreach($ts as $s) {
+        $occ = $s->occ;
+        $titre = $s->titre;
         
+        echo <<< EOT
+        <li> 
+            Mot trouvé $occ fois dans la série $titre.
+        </li>
+EOT;
+    }
+}   
+    echo "<p>Recherche de series par mots clés: </p>"; ?>   
 	<form id="searchForm" name="moteurSubmit" method="GET" action="."> <?php //controller/ControllerRecherche.php ?>
 	        <input type="text" value="<?php if(isset($_GET['moteur'])) {echo htmlspecialchars($_GET['moteur']);} ?>" name="moteur" id="moteur" />
 
@@ -10,16 +23,20 @@
 	</form>
 
 <?php
+
+
 //DEBUGG********************************************
-if (isset($rchch)) {
-	echo "rchch est à: "; print_r($rchch);
-}else{echo "$rchch n'est pas set";}
-
-if (isset($test)) {
-	echo "test est à: ".$test;
-}else{echo "test n'est pas set";}
-
 /*
+if (isset($rchch)) {
+    echo "rchch est à: "; print_r($rchch);
+}else{echo "rchch n'est pas set";}
+echo "<br/>";
+
+if (isset($_GET['moteur'])) {
+    echo "moteur est à: ".$_GET['moteur'];
+}else{echo "moteur n'est pas set";}
+echo "<br/>";
+
 if (isset($_GET['action'])) {
  	echo "action est à :  ".$_GET['action'];}
 echo "<br/>";
@@ -145,5 +162,21 @@ Lancement de la méthode de pagination
 -> Défaut : array('&hellip;', ' ', ' ', ' ', ' ')
 */
 $moteur->moteurPagination($page, 'p');
+}
+
+    if (($moteurR == "") && $action != "initial") {
+        echo "Le champ de recherche n'a pas été rempli.";
+    }else{
+        if (isset($tab_rchch)) {
+?>
+            <div>
+                <ul>
+                    <?php viewR($tab_rchch); ?>
+                </ul>
+            </div>
+<?php
+        }else{
+
+        }
 }
 ?>

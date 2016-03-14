@@ -9,22 +9,8 @@ include_once("Bundle/moteurPHP5.5/class.inc/stopwords.php");
 include_once("Bundle/moteurPHP5.5/class.inc/moteur-php5.5.class-inc.php");
 
 class ModelRecherche extends Model {
-    protected static $table = "series";
-    protected static $primary_index = "idword";
-
-    public static function isSubmit($rchch) {
-        try {
-            //valeur de idword comme :mail
-            $sql = "SELECT s.title, sk.nbOccSerie FROM seriekeywords sk, series s WHERE sk.idWord = :idword AND s.idSerie = sk.idSerie";                       
-            // Preparation de la requete
-            $req = self::$pdo->prepare($sql);
-            // execution de la requete
-            $req->execute($rchch);
-            return $req->fetchAll(PDO::FETCH_OBJ);
-        } catch (PDOException $mess) {
-            echo $mess->getMessage();
-            die("Erreur dans la BDD " . static::$table);
-        }
-    }
+    protected static $table = "keywords";
+    protected static $table2 = "seriekeywords";
+    protected static $table3 = "series";
 }
 ?>

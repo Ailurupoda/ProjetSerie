@@ -15,7 +15,7 @@ EOT;
         <!-- Une variable $tab_util est donnée -->    
         <div>
             <h1>Liste des séries:</h1>
-            <ol>
+            <ul>
             <?php view1($tab_util); ?>
-            </ol>
+            </ul>
         </div>

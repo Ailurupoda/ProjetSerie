@@ -9,16 +9,21 @@ switch($action) {
 
     case "rechercher":
         //$submit = ModelRecherche::isSubmit($rchch);
-        $rchch = array("idword" => myGet('idword'));
+        if (isset($_GET['moteur'])) {
+            $moteurR = $_GET['moteur'];
+        }else{$moteurR = "";}
+
         $act = "rechercher";
         $view = "home";
         $pagetitle = "Recherche";
+
+        $data = array("mot" => $moteurR);
+        $tab_rchch = ModelRecherche::selectr($data);
         break;
 
-    default:
     case "initial":
         //chargement de la vue recherche par défaut.
-        $rchch = array("idword" => "");
+        $moteurR = "";
         $act = "rechercher";
         $view = "home";
         $pagetitle = "Recherche";

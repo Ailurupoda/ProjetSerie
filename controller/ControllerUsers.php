@@ -30,8 +30,8 @@ switch($action) {
         $view = "create";
         break;
 
-case "create":
-        if (!empty($_SESSION['mail'])  && ($_SESISON['admin'] != 1)) {
+    case "create":
+        if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] != 1)) {
             $view = "error";
             $pagetitle = "Erreur";
             $msg = "Vous êtes déjà connecté";

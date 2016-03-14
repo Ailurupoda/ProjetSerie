@@ -35,7 +35,7 @@ deconnecter;
                     <a href="?action=home&controller=users">Accueil</a>
                 </li>
                 <li>
-                    <a href="?controller=users">Recommandations</a>
+                    <a href="?action=recommand&controller=users">Recommandations</a>
                 </li>
                 
                     <?php  if (!empty($_SESSION['mail'])) {

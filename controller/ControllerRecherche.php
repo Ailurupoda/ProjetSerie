@@ -13,7 +13,7 @@ switch($action) {
             $moteurR = $_GET['moteur'];
         }else{$moteurR = "";}
 
-        $act = "rechercher";
+        $act = "initial";
         $view = "home";
         $pagetitle = "Recherche";
 

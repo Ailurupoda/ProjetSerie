@@ -65,7 +65,7 @@ class moteurRecherche {
 	/*-- 8. $exact (true/false) pour une recherche exacte ou d'un ou plusieurs des mots --*/
 	/*-- 9. $accent (true/false) faire des recherches sans accent si la BDD le permet ----*/
 	/*------------------------------------------------------------------------------------*/
-	public function __construct($bdd = '', $champ = '', $table = '', $typeRecherche = 'regexp', $stopWords = array(), $exclusion = '3', $encoding = 'utf-8', $exact = false, $accent = true) {
+	public function __construct($bdd = '', $champ = '', $table = '', $typeRecherche = 'regexp', $stopWords = array(), $exclusion = '3', $encoding = 'utf-8', $exact = 'exact', $accent = true) {
 		$this->db			= $bdd;
 		$this->requete		= trim($champ);
 		$this->tableBDD		= $table;

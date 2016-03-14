@@ -1,13 +1,13 @@
  <?php  
 
-function viewR($ts){
-    foreach($ts as $s) {
-        $occ = $s->occ;
-        $titre = $s->titre;
+function viewR($cs){
+    foreach($cs as $r) {
+        $occ = $r->occ;
+        $titre = $r->titre;
         
         echo <<< EOT
         <li> 
-            Mot trouvé $occ fois dans la série $titre.
+            Trouvé $occ fois dans la série $titre.
         </li>
 EOT;
     }
@@ -94,6 +94,7 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
     function affichage($requete, $nbResults, $mots) {
 	if($nbResults == 0) { // Si aucun résultat n'est retourné
 	    echo "<p>Aucun résultat, veuillez effectuer une autre recherche !</p>";	
+
 	} else { // Sinon on affiche les résultats en boucle
  
         // Afficher le nombre de résultats
@@ -108,7 +109,7 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
  
                 // Résultats de recherche à afficher (à personnaliser)
                 //$texte  = "<br/>Mot clé: ".$key['word']."<br/>";
-                $texte = "<br/>Nombre d'occurences trouvées dans toutes les séries: ".$key['nbOcc']."<br/>";
+                $texte = "<br/>Nombre d'occurences du mot ".$key['word']." trouvées dans toutes les séries: ".$key['nbOcc']."<br/>";
 
                 /*
                 Objet pour surligner les mots recherchés si nécessaire

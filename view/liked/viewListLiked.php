@@ -2,10 +2,11 @@
 function view1($lkd){
 	foreach($lkd as $l) {
 		$idS = $l->idSerie;
+		$title = $l->title;
 		
 		echo <<< EOT
 		<li> 
-			Vous aimez la série d'id : $idS
+			Vous aimez la série $title
 		
 EOT;
 		if (!empty($_SESSION['mail'])){

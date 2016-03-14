@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="css/navstyle.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
@@ -59,6 +60,7 @@ deconnecter;
                 <li>
                     <a href="?controller=users">Recherche</a>
                 </li>
+<<<<<<< HEAD
                 <?php ;if (!empty($_SESSION['mail']) ) {
                     echo "<li>
                     <a href='?action=profil&controller=users'>Profil</a>
@@ -67,5 +69,32 @@ deconnecter;
                     ?>
                     
                 
+=======
+                <?php if (!empty($_SESSION['mail'])) {
+                    $logtemp = $_SESSION['mail'];
+                    echo<<<Profil
+                <li>
+                    <a href ='?action=read&controller=users&mail=$logtemp'>Profil</a>
+                </li>
+Profil;
+                }
+                ?>
+                <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
+                    echo<<<AjouterSeries
+                <li>
+                    <a href="?action=create&controller=series">Ajouter des Séries</a>
+                </li>
+AjouterSeries;
+                }
+                ?>
+                                <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
+                    echo<<<AjouterSubtitle
+                <li>
+                    <a href="?action=insert&controller=series">Ajouter des Sous-titres</a>
+                </li>
+AjouterSubtitle;
+                }
+                ?>
+>>>>>>> e12fef31b36595fe53afa4af976b52d2a4ee40da
             </ul>
         </nav>

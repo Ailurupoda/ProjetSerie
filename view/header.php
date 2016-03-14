@@ -60,7 +60,7 @@ deconnecter;
                 <li>
                     <a href="?controller=users">Recherche</a>
                 </li>
-<<<<<<< HEAD
+
                 <?php ;if (!empty($_SESSION['mail']) ) {
                     echo "<li>
                     <a href='?action=profil&controller=users'>Profil</a>
@@ -69,7 +69,7 @@ deconnecter;
                     ?>
                     
                 
-=======
+
                 <?php if (!empty($_SESSION['mail'])) {
                     $logtemp = $_SESSION['mail'];
                     echo<<<Profil
@@ -95,6 +95,6 @@ AjouterSeries;
 AjouterSubtitle;
                 }
                 ?>
->>>>>>> e12fef31b36595fe53afa4af976b52d2a4ee40da
+
             </ul>
         </nav>

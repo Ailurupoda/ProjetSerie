@@ -62,7 +62,7 @@ switch($action) {
         }
     	ModelLiked::deleteLike($data);
 
-    	$tab_lik = ModelLiked::selectWhere($i);
+    	$tab_lik = ModelLiked::selectTitleWhere($i);
 
     	$view = "list";
     	$pagetitle = "List Like";

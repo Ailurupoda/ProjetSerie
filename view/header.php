@@ -48,12 +48,6 @@ deconnecter;
 
                     </li>
                 
-                    <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
-                    echo "<li>
-                    <a href='?action=create&controller=series'>Ajouter une série</a>
-                        </li>";
-                    }
-                    ?>
                 <li>
                     <a href="?action=readAll&controller=series">Listing</a>
                 </li>

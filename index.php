@@ -11,4 +11,3 @@ define('DS', dirname(DIRECTORY_SEPARATOR));
 include ROOT . DS . 'controller' . DS . 'dispatcher.php';
 
 ?>
-

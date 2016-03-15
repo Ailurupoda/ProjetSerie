@@ -87,7 +87,11 @@ switch($action) {
         $view = "profil";
         break;
 
+<<<<<<< HEAD
 case "create":
+=======
+    case "create":
+>>>>>>> ff41018afc5b34717569643db203197700348468
         if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] != 1)) {
             $view = "error";
             $pagetitle = "Erreur";

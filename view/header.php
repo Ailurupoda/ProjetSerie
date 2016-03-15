@@ -48,33 +48,18 @@ deconnecter;
 
                     </li>
                 
-                    <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
-                    echo "<li>
-                    <a href='?action=create&controller=series'>Ajouter une série</a>
-                        </li>";
-                    }
-                    ?>
                 <li>
                     <a href="?action=readAll&controller=series">Listing</a>
                 </li>
                 <li>
                     <a href="?controller=users">Recherche</a>
-                </li>
-
-                <?php ;if (!empty($_SESSION['mail']) ) {
-                    echo "<li>
-                    <a href='?action=profil&controller=users'>Profil</a>
-                        </li>";
-                    }
-                    ?>
-                    
-                
+                </li>                
 
                 <?php if (!empty($_SESSION['mail'])) {
                     $logtemp = $_SESSION['mail'];
                     echo<<<Profil
                 <li>
-                    <a href ='?action=read&controller=users&mail=$logtemp'>Profil</a>
+                        <a href='?action=profil&controller=users'>Profil</a>
                 </li>
 Profil;
                 }

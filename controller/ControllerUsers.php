@@ -120,11 +120,13 @@ case "create":
             $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
             break;
         }else{
-        if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
-            $view = "error";
-            $pagetitle = "Erreur";
-            $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
-            break;
+            if (($curDate -myGet('birth')) < 18) {
+                if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
+                    $view = "error";
+                    $pagetitle = "Erreur";
+                    $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
+                    break;
+                }
             }     
         } 
         if(myGet('password') != myGet('password2')) {
@@ -162,13 +164,35 @@ case "create":
     case "updated":
    
 
-        if (is_null(myGet('mail')) || is_null(myGet('pwd')) || is_null(myGet('pwd2')) ){ 
+        if (is_null(myGet('mail')) || is_null(myGet('pwd')) || is_null(myGet('pwd2'))|| is_null(myGet('birth'))){ 
             $view = "error";
             $pagetitle = "Erreur";
             $msg = "Tous les champs n'ont pas été remplis";
             break;
         }
         if(myGet('pwd') != myGet('pwd2')) {
+            $view = 'error';
+            $pagetitle = 'Erreur';
+            $msg = "Les mots de passe ne correspondent pas";
+            break;
+        }
+        $curDate = date('Y-m-d');
+        if (($curDate -myGet('birth')) < 17) {
+            $view = "error";
+            $pagetitle = "Erreur";
+            $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
+            break;
+        }else{
+            if (($curDate -myGet('birth')) < 18) {
+                if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
+                    $view = "error";
+                    $pagetitle = "Erreur";
+                    $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
+                    break;
+                }
+            }     
+        } 
+        if(myGet('password') != myGet('password2')) {
             $view = 'error';
             $pagetitle = 'Erreur';
             $msg = "Les mots de passe ne correspondent pas";
@@ -191,7 +215,8 @@ case "create":
         $pwd = $u->password;
         $birth = $u->birth;
         $adm = $u->admin;
-        $r = "readonly";   
+        $r = "readonly";
+        $label = "Profil";   
         $pagetitle = "Profil";
         $submit = "Mettre à jour";
         $act = "updated";

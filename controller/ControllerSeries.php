@@ -7,6 +7,7 @@ require_once MODEL_PATH . 'Model' . ucfirst($controller) . '.php';
 
 switch($action) {
 
+<<<<<<< HEAD
     case "create":
         $hidden_id = "";
         $t = "";
@@ -97,6 +98,10 @@ switch($action) {
 			          Voici plus d'informations :\n";
                 echo 'Voici quelques informations de débogage :';
 			}
+=======
+    default:
+    //si l'action est inconnue, on effectue 'readAll'
+>>>>>>> ff41018afc5b34717569643db203197700348468
 
 			/*echo 'Voici quelques informations de débogage :';
 			print_r($_FILES);

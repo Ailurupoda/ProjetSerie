@@ -8,16 +8,14 @@
     </head>
     <body>
         <div>
-                <div>
-                
+                <div>  
                 <?php if (empty($_SESSION['mail'])) {
                         echo<<<connecter
                 <a href="?action=connect&controller=users">Se connecter </a>
                 <a href="?action=create&controller=users">S'inscrire </a>
 connecter;
             }
-            ?>
-                
+            ?>    
                 <?php if (!empty($_SESSION['mail'])) {
                     $logtemp = $_SESSION['mail'];
                     echo<<<deconnecter
@@ -28,7 +26,6 @@ deconnecter;
                 ?>
                 </div>
                 </div>              
-
         <div>
         <nav>
             <ul>
@@ -74,7 +71,11 @@ deconnecter;
                     $logtemp = $_SESSION['mail'];
                     echo<<<Profil
                 <li>
+
                     <a href ='?action=read&controller=users&mail=$logtemp'>Profil</a>
+
+                    <a href="?action=initial&controller=recherche">Recherche</a>
+
                 </li>
 Profil;
                 }

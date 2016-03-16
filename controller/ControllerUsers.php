@@ -122,11 +122,13 @@ switch($action) {
             $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
             break;
         }else{
-        if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
-            $view = "error";
-            $pagetitle = "Erreur";
-            $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
-            break;
+            if (($curDate -myGet('birth')) < 18) {
+                if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
+                    $view = "error";
+                    $pagetitle = "Erreur";
+                    $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
+                    break;
+                }
             }     
         } 
         if(myGet('pwd') != myGet('pwd2')) {
@@ -191,12 +193,15 @@ switch($action) {
                 }
             }     
         } 
+
         if(myGet('pwd') != myGet('pwd2')) {
+
             $view = 'error';
             $pagetitle = 'Erreur';
             $msg = "Les mots de passe ne correspondent pas";
             break;
         }
+
         $id  =  ModelUsers::getId(array("mail" => myGet('mail')));
         $data = array(
             "idUser" => $id['idUser'],

@@ -45,15 +45,10 @@ deconnecter;
 
                     </li>
                 
-                    <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
-                    echo "<li>
-                    <a href='?action=create&controller=series'>Ajouter une série</a>
-                        </li>";
-                    }
-                    ?>
                 <li>
                     <a href="?action=readAll&controller=series">Listing</a>
                 </li>
+
 
                 <?php ;if (!empty($_SESSION['mail']) ) {
                     echo "<li>
@@ -62,13 +57,10 @@ deconnecter;
                     }
                     ?>
                     
-                
-
-           
-              
+                     
+         
                 <li>
                     <a href="?action=initial&controller=recherche">Recherche</a>
-
                 </li>
     
                 <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {

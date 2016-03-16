@@ -26,7 +26,6 @@ if($_SESSION['admin']!=1  ){
                 <p>
                     <input type="submit" value="$submit" />
                 </p>
-
             </fieldset>
         </form>
 EOT;
@@ -61,10 +60,8 @@ EOT;
                 <p>
                     <input type="submit" value="$submit" />
                 </p>
-
             </fieldset>
         </form>
 EOT;
 }
-
 ?>

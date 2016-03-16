@@ -1,4 +1,15 @@
+<?php
 
+
+function view2($ts){
+    foreach($ts as $s) {
+        $t = $s->title;
+        echo '<option value="'.$t.'">';
+    }
+    echo "</datalist>";
+}
+
+?>
         <!-- Une variable $tab_series est donnée -->    
         <div>
             <form enctype="multipart/form-data" method="post" acceptcharset="UTF-8" action="?action=inserting&controller=series">
@@ -7,8 +18,11 @@
                 <p>
                 <label enctype="UTF-8" for="id_title">Nom de la série</label> :
                     <?php echo <<< EOT
-                    <input type="text" value="$t" name="title" id="id_title"/>
+                    <input list="series" type="text" value="$t" name="title" id="id_title" autocomplete="off" autofocus/>
+                    <datalist id="series">
 EOT;
+                    view2($tab_series);
+
 ?>                   
                 </p>
 <?php

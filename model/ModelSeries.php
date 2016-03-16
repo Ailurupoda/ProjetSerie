@@ -49,7 +49,7 @@ class ModelSeries extends Model {
 
         public static function insertSubtitleSerie($data){
         try{
-            $v = "(";
+            /*$v = "(";
             foreach ($data as $value) {
                 $v .= $value.",";
             }
@@ -59,7 +59,16 @@ class ModelSeries extends Model {
             $v = mb_convert_encoding($v, "UTF-8");
             //$v = substr($v, 0, strlen($v)-1);
             //print_r($v);
-            $sql = "INSERT INTO serieskeywords (idSerie,idWord,nbOcc) VALUES $v ON DUPLICATE KEY UPDATE nbOcc=nbOcc+1;";
+            $sql = "INSERT INTO serieskeywords (idSerie,idWord,nbOcc) VALUES $v ON DUPLICATE KEY UPDATE nbOcc=nbOcc+1;";*/
+            $idSer = array_shift($data);
+            $values = "";
+                foreach ($data as $value) {
+                    $values .= "(".$idSer.",".$value.",1),";
+                }
+
+
+            $values = rtrim($values, ', ');
+            $sql = "INSERT INTO serieskeywords (idSerie,idWord,nbOcc) VALUES $values ON DUPLICATE KEY UPDATE nbOcc=nbOcc+1; ";
             $req = self::$pdo->prepare($sql);
             // execution de la requete
             $req->execute($data);

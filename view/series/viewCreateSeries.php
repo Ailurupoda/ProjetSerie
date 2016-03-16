@@ -7,7 +7,7 @@ echo <<< EOT
                 $hidden_id
                 <p>
                     <label for="id_title">Nom de la série</label> :
-                    <input type="text" value="$t" name="title" id="id_title"/>
+                    <input type="text" value="$t" name="title" id="id_title" autocomplete="off"/>
                 </p>
                 <input type="hidden" name="action" value="$act" />
                 <input type="hidden" name="controller" value="series" />                

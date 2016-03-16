@@ -30,11 +30,23 @@ switch($action) {
         // Initialisation des variables pour la vue
         $tab_series = ModelSeries::selectAll();
         // Chargement de la vue
+        $hidden_id = "";
+        $t = "";
+        $label = "Créer";
+        $submit = "Création";
+        $act = "save";
         $view = "created";
         $pagetitle = "Liste des séries";
         break;
 
     case "inserting":
+        $tab_series = ModelSeries::selectAll();
+        $hidden_id = "";
+        $idS ="";
+        $t = "";
+        $label = "Insérer";
+        $submit = "Insertion";
+        $act = "inserting";
     	if ($_POST['title']=='') {
             $view = "error";
             $pagetitle = "Erreur";
@@ -66,8 +78,6 @@ switch($action) {
 		$uploadfile = $uploaddir . basename($_FILES['subtitles']['tmp_name']);
         $f = $_FILES['subtitles']['name'];
 			if(is_uploaded_file($_FILES['subtitles']['tmp_name'])) {
-			    echo "Le fichier est valide, et a été téléchargé
-			           avec succès. \n";
                        if(ModelSeries::insertFile($_FILES['subtitles'])==true){
                             $data = insertion($uploadfile);
                            //$data = array("idSerie" => $idS , "word" => insertion($uploadfile));
@@ -79,14 +89,17 @@ switch($action) {
                             }
                             //print_r($idW);
                             //$idW = ModelSeries::getIdWords($data);                          
-                            //$data2 = array();
+                            $data2 = array($idS);
                             foreach ($idW as $v) { 
-                                ModelSeries::insertSubtitleSerie(array('idSerie' => $idS, 'idWord' => $v[0]->idWord));
+                                array_push($data2, $v[0]->idWord);
+                                //ModelSeries::insertSubtitleSerie(array('idSerie' => $idS, 'idWord' => $v[0]->idWord));
                                 //foreach ($v as $value) {                                                              
                                     //ModelSeries::insertSubtitleSerie(array('idSerie' => $idS, 'idWord' => $value->idWord));
                                 //array_push($data2,array('idSerie' => $idS, 'idWord' => $value->idWord));
                                 //}
                             }
+                            //print_r($data2);
+                            ModelSeries::insertSubtitleSerie($data2);
                             //print_r($data2);
                             //ModelSeries::insertSubtitleSerie($data2);
                             //$id = ModelSeries::selectIdWords($data);

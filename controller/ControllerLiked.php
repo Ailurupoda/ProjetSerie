@@ -31,7 +31,8 @@ switch($action) {
         }
     	ModelLiked::insert($data);
 
-    	$tab_lik = ModelLiked::selectWhere($i);
+    	$tab_lik = ModelLiked::selectTitleWhere($i);
+       
 
     	$view = "list";
     	$pagetitle = "List liked";
@@ -61,7 +62,7 @@ switch($action) {
         }
     	ModelLiked::deleteLike($data);
 
-    	$tab_lik = ModelLiked::selectWhere($i);
+    	$tab_lik = ModelLiked::selectTitleWhere($i);
 
     	$view = "list";
     	$pagetitle = "List Like";
@@ -75,8 +76,7 @@ switch($action) {
     //initialisation des variables pour la vue
     $data = array("mail" => $_SESSION['mail']);
     $i = ModelUsers::getId($data);
-    $tab_lik = ModelLiked::selectWhere($i);
-    //chargement de la vue
+    $tab_lik = ModelLiked::selectTitleWhere($i);
     $view = "list";
     $pagetitle = "List Like";
     break;

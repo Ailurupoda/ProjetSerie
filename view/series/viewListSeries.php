@@ -37,6 +37,8 @@ EOT;
         <div>
             <h1>Liste des séries:</h1>
             <ol>
-            <?php view1($tab_serie); ?>
+
+            <?php view1($tab_series); ?>
+
             </ol>
         </div>

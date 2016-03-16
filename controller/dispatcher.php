@@ -120,10 +120,13 @@ else
     $action = "readAll";
 
 switch ($controller) {
-    
-        
+     
     case "series" :
         require_once "ControllerSeries.php";
+        break;
+   
+    case "recherche" :
+        require_once "ControllerRecherche.php";
         break;
 
     case "liked" :
@@ -134,7 +137,6 @@ switch ($controller) {
 
     case "users":
         require_once "ControllerUsers.php";
-        break;
-        
+        break;       
 }
 ?>

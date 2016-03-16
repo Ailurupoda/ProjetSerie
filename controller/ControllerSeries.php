@@ -7,6 +7,7 @@ require_once MODEL_PATH . 'Model' . ucfirst($controller) . '.php';
 
 switch($action) {
 
+
     case "create":
         $hidden_id = "";
         $t = "";
@@ -98,12 +99,6 @@ switch($action) {
                 echo 'Voici quelques informations de débogage :';
 			}
 
-			/*echo 'Voici quelques informations de débogage :';
-			print_r($_FILES);
-
-			echo '</pre>';*/
-			$view='inserting';
-    break;
 
     case "insert":
     	$tab_series = ModelSeries::selectAll();
@@ -117,6 +112,8 @@ switch($action) {
         $view = "insert";
     break;
 
+    default :
+    
     case "readAll":
     //initialisation des variables pour la vue
     $tab_series = ModelSeries::selectAll();

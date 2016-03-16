@@ -1,5 +1,4 @@
 <?php
-
 echo <<< EOT
         <form method="get" action="">
             <fieldset>
@@ -17,4 +16,5 @@ echo <<< EOT
             </fieldset>
         </form>
 EOT;
+?>        
 

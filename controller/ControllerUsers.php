@@ -7,6 +7,62 @@ require_once MODEL_PATH . 'Model' . ucfirst($controller) . '.php';
 
 switch($action) {
 
+    case "recommand" :
+        if(empty($_SESSION['mail'])){
+            $tab_recom = ModelUsers::selectSeriesRand();
+        }
+        else{
+            // recuperation de l'idUser
+            $data = array("mail" =>  $_SESSION['mail']);
+            $i = ModelUsers::getId($data);
+
+            //recuperation des series liked par l'utilisateur
+            $seriesLiked = ModelUsers::listLiked($i);
+            $seriesLiked = array_map('reset', $seriesLiked);
+
+            $listSeriesNotLiked = ModelUsers::listSeriesNotLiked($i);
+            $listSeriesNotLiked = array_map('reset', $listSeriesNotLiked);
+            //print_r($listSeries);
+
+            $toRecommand = array();
+
+
+            //Iteration pour chaque serie liked
+            foreach($seriesLiked as $sL){
+                //recuperation du top 5 des mots de la serie liked
+                $top5WordsLiked = ModelUsers::top5Words(array(':idSerie' => $sL));
+
+                foreach ($listSeriesNotLiked as $s) {
+                        $top5WordsSerie = ModelUsers::top5Words(array(':idSerie' => $s));
+                        //print_r($top5WordsSerie);
+
+                        $nbMatch = 0;
+                        foreach($top5WordsSerie as $t5ws){
+                            foreach ($top5WordsLiked as $t5wl) {
+                                if($t5ws['idWord'] == $t5wl['idWord'])
+                                    $nbMatch++;
+                            }
+                        }
+                        if($nbMatch >= 2)
+                            $toRecommand[] = $s;   
+                }
+
+
+            }
+
+            $tab_recom = array();
+            foreach($toRecommand as $tr){
+                $title = ModelUsers::getTitle(array(':idSerie' => $tr));
+                $tab_recom[] = $title[0]['title'];
+            }
+
+        }
+        $view = "recommand";
+        $pagetitle = "Recommandations";
+        break;    
+
+
+
     case "profil":
         if (empty($_SESSION['mail'])) {
             $view = "error";

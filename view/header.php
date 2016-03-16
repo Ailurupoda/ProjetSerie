@@ -54,9 +54,6 @@ deconnecter;
                 <li>
                     <a href="?action=readAll&controller=series">Listing</a>
                 </li>
-                <li>
-                    <a href="?controller=users">Recherche</a>
-                </li>
 
                 <?php ;if (!empty($_SESSION['mail']) ) {
                     echo "<li>
@@ -67,19 +64,13 @@ deconnecter;
                     
                 
 
-                <?php if (!empty($_SESSION['mail'])) {
-                    $logtemp = $_SESSION['mail'];
-                    echo<<<Profil
+           
+              
                 <li>
-
-                    <a href ='?action=read&controller=users&mail=$logtemp'>Profil</a>
-
                     <a href="?action=initial&controller=recherche">Recherche</a>
 
                 </li>
-Profil;
-                }
-                ?>
+    
                 <?php if (!empty($_SESSION['mail'])  && ($_SESSION['admin'] == 1)) {
                     echo<<<AjouterSeries
                 <li>

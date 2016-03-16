@@ -26,7 +26,6 @@ if($_SESSION['admin']!=1  ){
                 <p>
                     <input type="submit" value="$submit" />
                 </p>
-
             </fieldset>
         </form>
 EOT;
@@ -50,21 +49,19 @@ EOT;
                 </p>
                 <p>
                     <label for="id_pw">Mot de passe :</label>
-                    <input type="password" name="password" id="id_pwd" required/>
+                    <input type="password" name="pwd" id="id_pwd" required/>
                 </p>
                 <p>
                     <label for="id_pwd2">Retaper mot de passe :</label>
-                    <input type="password" name="password2" id="id_pwd2" required/>
+                    <input type="password" name="pwd2" id="id_pwd2" required/>
                 </p>
                 <input type="hidden" name="action" value="$act" />
                 <input type="hidden" name="controller" value="Users" />                
                 <p>
                     <input type="submit" value="$submit" />
                 </p>
-
             </fieldset>
         </form>
 EOT;
 }
-
 ?>

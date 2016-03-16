@@ -57,7 +57,8 @@ body
 
 a:link,a:visited,a:hover,a:focus,a:active
 { 
- color: #2963C6; 
+ /*color: #2963C6;*/
+ color : white; 
  font-family: calibri;
  text-decoration:none; 
 } 

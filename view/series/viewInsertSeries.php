@@ -30,7 +30,7 @@ echo <<< EOT
                 <p>
                     <label for="id_subtitle">Fichier de Sous-titres</label> :
                     <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-                    <input type="file" name="subtitles" id="id_subtitle"/>
+                    <input type="file" name="subtitles[]" id="id_subtitle" multiple/>
                 </p>
                 <input type="hidden" name="action" value="$act" />
                 <input type="hidden" name="controller" value="series" />                

@@ -84,11 +84,11 @@ class ModelSeries extends Model {
             $table = static::$table;
             $primary = static::$primary_index;
             $values = "";
-            $values = '("' . $data['name'] . '")';
+            $values = "('". $data . "')";
             $sql = "INSERT INTO files (nameFile) VALUES $values";
             $req = self::$pdo->prepare($sql);
             // execution de la requete
-            $req->execute($data);
+            $req->execute(array($data));
             return true;
         } catch (PDOException $e) {
             echo $e->getMessage();

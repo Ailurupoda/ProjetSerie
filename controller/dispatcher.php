@@ -14,10 +14,15 @@ function myGet($nomvar) {
 }
 
 function insertion($var){
-    define('SRT_STATE_SUBNUMBER', 0);
-    define('SRT_STATE_TIME',      1);
+    
+    if (!defined('SRT_STATE_SUBNUMBER') and !defined('SRT_STATE_TIME') and !defined('SRT_STATE_TEXT') and !defined('SRT_STATE_BLANK')){
+        define('SRT_STATE_SUBNUMBER', 0);
+        define('SRT_STATE_TIME',      1);
     define('SRT_STATE_TEXT',      2);
     define('SRT_STATE_BLANK',     3);
+    }
+    
+    print_r($var);
 
     $lines = file($var);
     $lines = $lines;
@@ -80,7 +85,7 @@ function insertion($var){
     'aucunes','certains','certaine','certaines','tel','telle','tels','telles','tout','toute','tous','toutes',
     'même','mêmes','nul','nulle','nuls','nulles','quelqu\'un','quelqu\'une','quelques','uns',
     'quelques','personne','aucun','aucuns','autrui','quiconque','d\'aucuns','',' ','qu\'il','au','ton','mais','<','i>','à','a','est',
-    'oui','pour','bien','mon','merci','était','suis','sais');
+    'oui','pour','bien','mon','merci','était','suis','sais', 'sans', 'laisse', 'déjà', 'aime', 'that', 'étais', 'fois', 'personne', 'doit', 'vrai');
 
 
     $mots = array();

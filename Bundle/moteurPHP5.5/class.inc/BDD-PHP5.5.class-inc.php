@@ -3,7 +3,7 @@
 $base    = "nextwatch";
 $serveur = "localhost";
 $login   = "root";
-$passe   = "pandas";
+$passe   = "";
 
 // Connexion
 $link = new mysqli($serveur, $login, $passe, $base);

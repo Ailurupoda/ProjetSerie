@@ -53,10 +53,14 @@ switch($action) {
             $tab_recom = array();
             foreach($toRecommand as $tr){
                 $title = ModelUsers::getTitle(array(':idSerie' => $tr));
-                $tab_recom[] = $title[0]['title'];
+                if(!in_array($title[0]['title'], $tab_recom)){
+                    $tab_recom[] = $title[0]['title'];
+                }
             }
+            //print_r($tab_recom);
 
         }
+        $nav_en_cours="recommandations";
         $view = "recommand";
         $pagetitle = "Recommandations";
         break;    
@@ -74,7 +78,7 @@ switch($action) {
         $data  =  ModelUsers::getId(array("mail" => $_SESSION['mail']));
 
         $u = ModelUsers::select($data);
-
+        $nav_en_cours="profil";
         $m = $u->mail;
         $pwd = $u->password;
         $birth = $u->birth;
@@ -103,12 +107,14 @@ switch($action) {
         $r = "required";
         $label = "Créer";
         $pagetitle = "Création d'un utilisateur";
+        $nav_en_cours="";
         $submit = "S'inscrire";
         $act = "save";
         $view = "create";
         break;
 
     case "save":
+        $nav_en_cours="";
          if (is_null(myGet('mail') || is_null(myGet('pwd')))){ 
             $view = "error";
             $pagetitle = "Erreur";
@@ -116,13 +122,13 @@ switch($action) {
             break;
         }
         $curDate = date('Y-m-d');
-        if (($curDate -myGet('birth')) < 17) {
+        if (($curDate -myGet('birth')) < 18) {
             $view = "error";
             $pagetitle = "Erreur";
             $msg = "Vous n'avez pas l'age requis pour vous inscrire ";
             break;
         }else{
-            if (($curDate -myGet('birth')) < 18) {
+            if (($curDate -myGet('birth')) < 19) {
                 if(((10*$curDate[5] + $curDate[6]) - (10*(myGet('birth')[5]) + myGet('birth')[6])) < 0){
                     $view = "error";
                     $pagetitle = "Erreur";
@@ -221,6 +227,7 @@ switch($action) {
         $submit = "Mettre à jour";
         $act = "updated";
         $view = "profil";
+        $nav_en_cours="profil";
         break;
 
 
@@ -232,6 +239,7 @@ switch($action) {
         $label = "Connecter";
         $view = "connect";
         $pagetitle = "Connection";
+        $nav_en_cours="";
         break;
 
     case "connected":
@@ -289,6 +297,7 @@ switch($action) {
             $pagetitle = "Erreur";  
             $msg = "Mauvais mot de passe";
         }
+        $nav_en_cours="";
         break;
 
     case "deconnect":
@@ -297,6 +306,7 @@ switch($action) {
         unset($_SESSION);
         $view = "home";
         $pagetitle = "Accueil";
+        $nav_en_cours="";
 
         break;
 
@@ -308,6 +318,7 @@ switch($action) {
     case "home" :
     //initialisation des variables pour la vue
     //chargement de la vue
+    $nav_en_cours="";
     $view = "home";
     $pagetitle = "Home page";
     break;

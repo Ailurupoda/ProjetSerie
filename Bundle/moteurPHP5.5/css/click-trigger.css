@@ -1,0 +1,3 @@
+#imgLoading {display:none; width:220px; margin:.8em auto;}
+#loadMore {display:none; border-radius:5px; border:1px solid #ddd; background:#efefef; text-align:center; font-weight:bold; box-shadow:2px 2px 2px rgba(50,50,50,.4); color:#444; text-decoration:none; padding:.5em; width:60%; margin:1em auto; cursor:pointer;}
+#loadMore:hover{background:#dfdfdf;color:#222}

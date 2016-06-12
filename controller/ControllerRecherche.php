@@ -12,7 +12,7 @@ switch($action) {
         if (isset($_GET['moteur'])) {
             $moteurR = $_GET['moteur'];
         }else{$moteurR = "";}
-
+        $nav_en_cours="recherche";
         $act = "rechercher";
         $view = "home";
         $pagetitle = "Recherche";
@@ -28,6 +28,7 @@ switch($action) {
 
     case "initial":
         //chargement de la vue recherche par défaut.
+        $nav_en_cours="recherche";
         $moteurR = "";
         $act = "rechercher";
         $view = "home";

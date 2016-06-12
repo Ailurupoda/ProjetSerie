@@ -15,6 +15,7 @@ switch($action) {
         $submit = "Création";
         $act = "save";
         $view = "create";
+        $nav_en_cours="create";
         break;
 
     case "save":
@@ -36,6 +37,7 @@ switch($action) {
         $submit = "Création";
         $act = "save";
         $view = "created";
+        $nav_en_cours="create";
         $pagetitle = "Liste des séries";
         break;
 
@@ -115,6 +117,7 @@ switch($action) {
 			print_r($_FILES);
 
 			echo '</pre>';*/
+        $nav_en_cours="insert";
 			$view='inserting';
     break;
 
@@ -126,16 +129,38 @@ switch($action) {
         $label = "Insérer";
         $pagetitle = "Insertion de sous-titres";
         $submit = "Insertion";
+        $nav_en_cours="insert";
         $act = "inserting";
         $view = "insert";
     break;
 
     case "readAll":
     //initialisation des variables pour la vue
-    $tab_series = ModelSeries::selectAll();
+    $tab_count_series = ModelSeries::countSeries();
     //chargement de la vue
     $view = "list";
+    $page = 1;
+    $perPage = 20;
+    $nb = $tab_count_series[0]->nbSeries / $perPage;
+    $nbPages = round($nb);
     $pagetitle = "Listing";
+    $nav_en_cours="liste";
+    $data = array(0 => $page, 1 => $perPage);
+    $tab_series = ModelSeries::selectPage($data);
+    break;
+        case "readPage":
+    //initialisation des variables pour la vue
+    $tab_count_series = ModelSeries::countSeries();
+    //chargement de la vue
+    $view = "list";
+    $page = intval($_GET["page"]);
+    $perPage = 20;
+    $nb = $tab_count_series[0]->nbSeries / $perPage;
+    $nbPages = round($nb);
+    $pagetitle = "Listing";
+    $nav_en_cours="liste";
+    $data = array(0 => $page, 1 => $perPage);
+    $tab_series = ModelSeries::selectPage($data);
     break;
 
 }

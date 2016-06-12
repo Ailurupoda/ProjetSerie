@@ -25,6 +25,35 @@ class ModelSeries extends Model {
             die("Erreur lors de la recherche dans la BDD keywords insertsubtitle");
         }
     }
+    
+    public static function countSeries(){
+        try {
+            $sql = "SELECT count(*) as nbSeries FROM " . static::$table;
+            $req = self::$pdo->query($sql);
+            // fetchAll retoure un tableau d'objets représentant toutes les lignes du jeu d'enregistrements 
+            return $req->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche de tous les objets de la BDD " . static::$table);
+        }
+    }
+    
+    public static function selectPage($data){
+        try {
+            $cPage = intval($data[0]); //page courante de l'affichage des séries 
+            $perPage = intval($data[1]); //nombre de séries par page 
+            $debut=($cPage-1)*$perPage;
+            $sql = "SELECT * FROM " . static::$table . " LIMIT $debut,$perPage";
+            // Preparation de la requete
+            $req = self::$pdo->prepare($sql);
+            // execution de la requete
+            $req->execute($data);
+            return $req->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la BDD keywords getIdWords");
+        }
+    }
 
     public static function getIdWords($data){
         try{
@@ -43,7 +72,7 @@ class ModelSeries extends Model {
             return $req->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             echo $e->getMessage();
-            die("Erreur lors de la recherche dans la BDD keywords getIdWords");
+            die("Erreur lors de la recherche dans la BDD " . static::$table);
         }
     }
 

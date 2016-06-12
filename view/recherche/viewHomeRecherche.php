@@ -1,4 +1,5 @@
- <?php  
+<?php $nav_en_cours = 'recherchhe'; ?>
+<?php  
 
 function viewR($cs){
     foreach($cs as $r) {
@@ -11,15 +12,18 @@ function viewR($cs){
         </li>
 EOT;
     }
-}   
-    echo "<p>Recherche de series par mots clés: </p>"; ?>   
+}      ?>
 	<form id="searchForm" name="moteurSubmit" method="GET" action="."> <?php //controller/ControllerRecherche.php ?>
-	        <input type="text" value="<?php if(isset($_GET['moteur'])) {echo htmlspecialchars($_GET['moteur']);} ?>" name="moteur" id="moteur" />
-
+    <fieldset class="form-group">
+        <div class="input-group">
+        <?php echo "<label>Recherche de séries par mots-clés: </label>"; ?>    
+        <input type="text" value="<?php if(isset($_GET['moteur'])) {echo htmlspecialchars($_GET['moteur']);} ?>" name="moteur" id="moteur" autofocus/>
+        </div>
 	        <input type="hidden" name="action" value="<?php echo($act) ?>" />
             <input type="hidden" name="controller" value="recherche" />   
 	        
 	        <input type="submit" value="Envoyer" />
+        </fieldset>
 	</form>
 
 <?php
@@ -112,7 +116,7 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
 
                 $texte = "Le mot ";
                 $texte .= $key['word'];
-                $texte .= " à trouvées a été ";
+                $texte .= " a été trouvé ";
                 $texte .= $key['nbOcc']." fois.<br/>";
 
                 /*
@@ -178,7 +182,7 @@ $moteur->moteurPagination($page, 'p');
                     echo "_________________________________________________<br/><br/>";
                     echo "<ol>";
                     if (count($tabUneDimension)!=0) {
-                        echo "<b>".$motRecherche."</b> à été trouvé dans ".count($tabUneDimension)." séries : <br/>";
+                        echo "<b>".$motRecherche."</b> a été trouvé dans ".count($tabUneDimension)." séries : <br/>";
                         //var_dump($tabUneDimension);
                         //Le tableau est constitué d'objets de type stdclass                
                         foreach ($tabUneDimension as $valeur) {
@@ -197,7 +201,7 @@ $moteur->moteurPagination($page, 'p');
                 echo "_________________________________________________";
             echo "</div>";
         }else{
-            echo "<br/><em>Erreur :</em> Aucune série correspondante.";
+            //echo "<br/><em>Erreur :</em> Aucune série correspondante.";
         }
 }
 ?>

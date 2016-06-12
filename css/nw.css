@@ -1,0 +1,658 @@
+body
+{  
+  padding: 0; 
+  margin: 1%;
+  color: white;
+  background-color: #203747;
+  font-family: calibri;
+}
+
+.body{
+    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: 100%;
+}
+
+
+
+/*mise en forme icones*/
+
+.logo{
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  margin: 1px;
+  width: 160px;
+  height: 160px;
+  font-size: 0;
+  text-indent: -9999px;
+}
+
+.logo-tourne{
+    position: relative;
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
+}
+
+.logo-tourne::before,
+.logo-tourne::after{
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+    background-size:10%;
+  background: url("logo.png");
+  background-image: url("logo.svg"), none;
+  content: "";
+}
+
+
+.logo-tourne:hover{
+    transform: rotate(360deg);
+}
+
+
+
+.icon {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  margin: 1px;
+  width: 120px;
+  height: 120px;
+  font-size: 0;
+  text-indent: -9999px;
+}
+
+.icon-slide {
+  position: relative;
+}
+
+.icon-slide-en-cours{
+  position: relative
+}
+
+.icon-slide-en-cours::before,
+.icon-slide-en-cours::after {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("menu.png");
+  background-image: url("menu.svg"), none;
+  content: "";
+  -webkit-transition: left 0.3s;
+          transition: left 0.3s;
+}
+
+.icon-slide::before,
+.icon-slide::after {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("menu.png");
+  background-image: url("menu.svg"), none;
+  content: "";
+  -webkit-transition: left 0.3s;
+          transition: left 0.3s;
+}
+
+.icon-slide-en-cours::before {
+  left: 0;
+  background-color: #f5a42b;
+}
+
+.icon-slide-en-cours::after {
+  left: -100%;
+}
+
+.icon-slide-en-cours:hover::before {
+  left: 100%;
+}
+
+.icon-slide-en-cours:hover::after {
+  left: 0;
+}
+
+
+/* loupe */
+.icon-slide-en-cours.loupe::before {
+  background-position: -20px 0;
+    background-color: #f5a42b;
+}
+.icon-slide-en-cours.loupe::after {
+  background-position: -20px 0;
+    background-color: #f5a42b;
+}
+
+
+/* liste */
+.icon-slide-en-cours.liste::before{
+  background-position: -165px 0px;
+    background-color: #f5a42b;
+}
+.icon-slide-en-cours.liste::after{
+  background-position: -165px 0px;
+    background-color: #f5a42b;
+}
+
+
+/* like */
+.icon-slide-en-cours.like::before {
+  background-position: -287px 0;
+    background-color: #f5a42b;
+}
+.icon-slide-en-cours.like::after {
+  background-position: -287px 0;
+    background-color: #f5a42b;
+}
+
+
+
+/* recommandations */
+.icon-slide-en-cours.recommandations::before {
+  background-position: -387px 0;
+    background-color: #f5a42b;
+}
+.icon-slide-en-cours.recommandations::after {
+  background-position: -387px 0;
+    background-color: #f5a42b;
+}
+
+/* profil */
+.icon-slide-en-cours.profil::before {
+  background-position: -502px 0;
+    background-color: #f5a42b;
+}
+.icon-slide-en-cours.profil::after {
+  background-position: -502px 0;
+    background-color: #f5a42b;
+}
+
+
+
+/* administration */
+.icon-slide-en-cours.administration::before {
+  background-position: -732px 0;
+    background-color: #f5a42b;
+}
+
+.icon-slide-en-cours.administration::after {
+  background-position: -732px 0;
+    background-color: #f5a42b;
+}
+
+/* ajout sous-titres */
+.icon-slide-en-cours.ajout::before {
+  background-position: -865px 0;
+    background-color: #f5a42b;
+}
+
+.icon-slide-en-cours.ajout::after {
+  background-position: -865px 0;
+    background-color: #f5a42b;
+}
+
+
+.icon-slide::before {
+  left: 0;
+  background-color: #424242;
+}
+
+.icon-slide::after {
+  left: -100%;
+}
+
+.icon-slide:hover::before {
+  left: 100%;
+}
+
+.icon-slide:hover::after {
+  left: 0;
+}
+
+
+/* loupe */
+.icon-slide.loupe::before,
+.icon-slide.loupe::after {
+  background-position: -20px 0;
+}
+
+.icon-slide.loupe::after {
+  background-color: #f5a42b;
+}
+
+/* liste */
+.icon-slide.liste::before,
+.icon-slide.liste::after {
+  background-position: -165px 0px;
+}
+
+.icon-slide.liste::after {
+  background-color: #f5a42b;
+}
+
+/* like */
+.icon-slide.like::before,
+.icon-slide.like::after {
+  background-position: -287px 0;
+}
+
+.icon-slide.like::after {
+  background-color: #f5a42b;
+}
+
+/* recommandations */
+.icon-slide.recommandations::before,
+.icon-slide.recommandations::after {
+  background-position: -387px 0;
+}
+
+.icon-slide.recommandations::after {
+  background-color: #f5a42b;
+}
+
+/* profil */
+.icon-slide.profil::before,
+.icon-slide.profil::after {
+  background-position: -502px 0;
+}
+
+.icon-slide.profil::after {
+  background-color: #f5a42b;
+}
+
+/* administration */
+.icon-slide.administration::before,
+.icon-slide.administration::after {
+  background-position: -732px 0;
+}
+
+.icon-slide.administration::after {
+  background-color: #f5a42b;
+}
+
+/* ajout sous-titres */
+.icon-slide.ajout::before,
+.icon-slide.ajout::after {
+  background-position: -865px 0;
+}
+
+.icon-slide.ajout::after {
+  background-color: #f5a42b;
+}
+
+/*mise en forme flexbox*/
+
+.elementRight{
+  display: inline-block;
+  margin: auto;
+  }
+
+.elementRight::before,
+.elementRight::after {
+  display: inline-block;
+  position: absolute;
+  webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.elementRight.inscription{
+  webkit-transition: background 0.3s;
+  transition: background 0.3s;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+  background-color: #f5a42b;
+  border: 3px solid #f5a42b;
+  border-radius: 8px;
+}
+.elementRight.inscription:hover{
+  padding: 5px;
+  text-align: center;
+  color: #f5a42b;
+  background-color: #424242;
+  border: 3px solid #f5a42b;
+  border-radius: 8px;
+}
+.elementRight.inscription:active{
+  padding: 5px;
+  text-align: center;
+  color: #f5a42b;
+  background-color: #424242;
+  border: 3px solid #f5a42b;
+  border-radius: 8px;
+}
+
+.elementRight.connection{
+    webkit-transition: background 0.3s;
+          transition: background 0.3s;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  color: #f5a42b;
+  background-color: #424242;
+  border: 3px solid #f5a42b;
+  border-radius: 8px;
+}
+.elementRight.connection:hover{
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+  background-color: #f5a42b;
+  border: 3px solid #f5a42b;
+  border-radius: 8px;
+}
+.elementRight.connection:active{
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+  background-color: #f5a42b;
+  border: 3px solid #f5a42b;
+  border-radius: 8px;
+}
+
+a:link,a:visited,a:hover,a:focus,a:active
+{ 
+ /*color: #2963C6;*/
+ color : white; 
+ font-family: calibri;
+ text-decoration:none; 
+} 
+
+li{
+  list-style-type: none;
+}
+
+/* header */
+header{
+position: fixed;
+padding: 1%;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 10000;
+overflow: hidden;
+margin-bottom: 20%;
+}
+
+.header-logo{
+  position: relative;
+  margin-right: auto;
+}
+
+.main-header {
+  color: #B13C2E;
+  background: #424242;
+
+}
+/* Les éléments sont placés l'un à côté de l'autre */
+.header-inner {
+  table-layout: fixed;
+
+  width: 100%;
+  margin: auto;
+ /* on ventile un peu */
+}
+.header-inner > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+/* Alignement du menu */
+.header-nav { /* on positionne le conteneur */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 73%;
+}
+
+.global{
+  margin-top: 12%;
+  margin-top: 12%;
+  padding-left: 25%;
+  padding-right: 25%;
+}
+/*
+  Le menu est en inline-block pour le rendre sensible à l'alignement à droite. Ses items aussi sont en inline.
+*/
+.header-nav ul,
+.header-nav li {
+  display: inline-block;
+  list-style: none;
+}
+
+.nav-is-stuck .main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+}
+ 
+
+.header-box{
+  margin-top: 3%;
+  margin-right: 50px;
+  float: right;
+}
+
+.page{
+    width: auto;
+    background-color: #f5a42b;
+    border-radius: 2px;
+    margin: auto;
+}
+
+.pagination{
+    display: inline-block;
+    text-align: justify;
+    width: 100%;
+    margin: auto;
+}
+
+
+.cellule{
+    color: white;
+    border-radius: 2px;
+    background-color: #192c39;
+    opacity: 0.8;
+    width: 100%;
+    margin: auto;
+}
+
+.id{
+    display: inline-block;
+    width: 1em;
+    opacity: 2;
+}
+
+.title{
+    display: inline-block;
+    opacity: 1;
+    width: 40%;
+    text-align: left;
+}
+
+.blike{
+    display: inline-block;
+    opacity: 1;
+}
+
+.butt{
+    width: 50px;
+}
+
+footer{
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 1.5em;
+    position: fixed;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #203747;
+    width: 100%;
+    height: 3em;
+}
+
+label{
+    vertical-align: middle;
+    margin: auto;
+    width: 25%;
+    padding: 12px 20px;
+    box-sizing: border-box; 
+}
+input[type=submit] {
+    width: 100%;
+    background-color: #f5a42b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 3px solid #f5a42b;
+    display: inline-block;
+}
+
+input[type=text], select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 1% 0 1% 1%;
+    float: right;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 2px solid #424242;
+}
+input[type=text]:focus {
+    border: 2px solid #f5a42b;
+     webkit-transition: background 0.3s;
+          transition: background 0.3s;
+  background-color: #424242;
+    color: #f5a42b;
+}
+input[type=date], select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 1% 0 1% 1%;
+    float: right;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 2px solid #424242;
+}
+input[type=date]:focus {
+    border: 2px solid #f5a42b;
+     webkit-transition: background 0.3s;
+          transition: background 0.3s;
+  background-color: #424242;
+    color: #f5a42b;
+}
+input[type=password], select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 1% 0 1% 1%;
+    float: right;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 2px solid #424242;
+}
+input[type=password]:focus {
+    border: 2px solid #f5a42b;
+    webkit-transition: background 0.3s;
+          transition: background 0.3s;
+  background-color: #424242;
+    color: #f5a42b;
+}
+input[type=submit]:hover {
+      webkit-transition: background 0.3s;
+          transition: background 0.3s;
+  color: #f5a42b;
+  background-color: #424242;
+  border: 3px solid #f5a42b;
+}
+
+.input-group{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.form-group{
+    width: auto;
+    height: auto;
+}
+fieldset{
+    background-color: #203747;
+    border-style: none;
+    border-radius: 4px;
+    box-shadow: 0px 0px 2px 0px #000;
+}
+
+.tooltip .tooltiptext {
+    width: 120px;
+    top: 100%;
+    left: 50%;
+    margin-left: -100px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #203747 transparent;
+}
+
+.tooltip .tooltiptext {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+    opacity: 0.8;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /*border-bottom: 1px dotted black;*/ /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #203747;
+    color: #fff;
+    text-align: center;
+    padding: 0px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+

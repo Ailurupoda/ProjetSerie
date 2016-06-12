@@ -1,4 +1,4 @@
-<?php
+<?php 
 function view1($recom){
 	foreach($recom as $r) {
 		if(empty($_SESSION['mail'])){
@@ -16,7 +16,7 @@ EOT;
 		echo "</li>";
 	}
 }      
-?>
+?> <?php $nav_en_cours = 'recommandations'; ?>
         <!-- Une variable $tab_recom est donnée -->    
         <div>
             <h1>Liste des séries recommandées:</h1>

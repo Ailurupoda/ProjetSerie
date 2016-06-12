@@ -43,7 +43,7 @@ switch($action) {
                                     $nbMatch++;
                             }
                         }
-                        if($nbMatch >= 2)
+                        if($nbMatch >= 5)
                             $toRecommand[] = $s;   
                 }
 

@@ -18,6 +18,7 @@ class ModelSeries extends Model {
             //print_r($v);
 	        $sql = "INSERT INTO keywords (word,nbOcc) VALUES $v ON DUPLICATE KEY UPDATE nbOcc=nbOcc+1;";
 	        $req = self::$pdo->prepare($sql);
+            //print_r($req);
             // execution de la requete
             $req->execute($data);
     	} catch (PDOException $e) {
@@ -71,6 +72,7 @@ class ModelSeries extends Model {
             $sql = "INSERT INTO serieskeywords (idSerie,idWord,nbOcc) VALUES $values ON DUPLICATE KEY UPDATE nbOcc=nbOcc+1; ";
             $req = self::$pdo->prepare($sql);
             // execution de la requete
+            //print_r($req);
             $req->execute($data);
         } catch (PDOException $e) {
             echo $e->getMessage();

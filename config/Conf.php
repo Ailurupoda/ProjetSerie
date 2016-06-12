@@ -7,6 +7,7 @@ class Conf {
         'database' => 'nextwatch', // votre login dans notre cas
         'login' => 'root',
         'password' => ''
+
     );
     
     private static $debug = true;

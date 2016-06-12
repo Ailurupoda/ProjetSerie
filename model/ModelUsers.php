@@ -52,7 +52,7 @@ class ModelUsers extends Model {
 
         public static function top5Words($data) {
         try {
-            $sql = "SELECT idWord FROM seriesKeywords S WHERE S.idSerie = :idSerie ORDER BY nbOcc DESC LIMIT 5 ";                       
+            $sql = "SELECT idWord FROM seriesKeywords S WHERE S.idSerie = :idSerie ORDER BY nbOcc DESC LIMIT 10 ";                       
             // Preparation de la requete
             $req = self::$pdo->prepare($sql);
             // execution de la requete

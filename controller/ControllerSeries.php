@@ -48,7 +48,9 @@ switch($action) {
         $label = "Insérer";
         $submit = "Insertion";
         $act = "inserting";
-        if ($_POST['title']=='') {
+       // print_r($_FILES['subtitles']);
+       // print_r($_POST['title']);
+        if (strlen($_POST['title'])== 0) {
             $view = "error";
             $pagetitle = "Erreur";
             $message = "Il manque le titre.";
@@ -76,6 +78,7 @@ switch($action) {
             break;
         }*/
         $incTs = 0;
+        $incTm = 0;
         foreach ($_FILES['subtitles']['tmp_name'] as $valT2) {
             //print_r($i);
             $da = array("title" => $_POST['title']);
@@ -85,12 +88,19 @@ switch($action) {
             $uploaddir = 'C:\wamp\tmp\\';
             $uploadfile = $uploaddir . basename($valT2);
             $f = $valTest;
-            //print_r($title);
-            //print_r($_FILES['subtitles']['name'][$i]);
                 if(is_uploaded_file($valT2)) {
                            if(ModelSeries::insertFile($_FILES['subtitles']['name'][$incTs])==true){
+
                                 $data = insertion($uploadfile);
                                //$data = array("idSerie" => $idS , "word" => insertion($uploadfile));
+                                //utf8_encode($data[$incTm]);
+                                //print_r($data[$incTm]);
+                                //print_r($data);
+                                foreach ($data as $value) {
+                                    utf8_encode($value);
+                                   // print_r($value);
+                                }
+                                //print_r($data);
                                 ModelSeries::insertSubtitle($data);                           
                                 $idW = array();
                                 foreach ($data as $value) {
@@ -121,7 +131,7 @@ switch($action) {
                     echo 'Voici quelques informations de débogage :';
                 }
                 $incTs++;
-                print_r($incTs);
+                //print_r($incTs);
         }
         
 

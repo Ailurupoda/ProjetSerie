@@ -21,15 +21,12 @@ function insertion($var){
     define('SRT_STATE_TEXT',      2);
     define('SRT_STATE_BLANK',     3);
     }
-    
-    print_r($var);
+
 
     $lines = file($var);
-    $lines = $lines;
     $subs = array();
     $state = SRT_STATE_SUBNUMBER;
     $subText = '';
-
 
     foreach($lines as $line) {
         switch($state) {
@@ -85,30 +82,34 @@ function insertion($var){
     'aucunes','certains','certaine','certaines','tel','telle','tels','telles','tout','toute','tous','toutes',
     'même','mêmes','nul','nulle','nuls','nulles','quelqu\'un','quelqu\'une','quelques','uns',
     'quelques','personne','aucun','aucuns','autrui','quiconque','d\'aucuns','',' ','qu\'il','au','ton','mais','<','i>','à','a','est',
-    'oui','pour','bien','mon','merci','était','suis','sais', 'sans', 'laisse', 'déjà', 'aime', 'that', 'étais', 'fois', 'personne', 'doit', 'vrai');
+    'oui','pour','bien','mon','merci','était','suis','sais', 'sans', 'laisse', 'déjà', 'aime', 'that', 'étais', 'fois', 'personne', 'doit', 'vrai', 'avec', 'plus', 'fait', 'comme', 'faire', 'pourquoi', 'veux', 'vais', 'peux', 'alors', 'quand', 'dire', 'comment', 'peut', 'rien', 'cette', 'sont', 'fais', 'vais', 'être', 'était', 'avoir', 'très', 'vraiment', 'aussi', 'dois', 'avais',  );
 
 
     $mots = array();
-
         foreach ($subs as $value) {
             $groupemots = array();
             $groupemots[] = preg_split('/[\t\r\n\v\f\s,-_:;.!"#$?`{|}~@%&\']+/', strtolower($value));
             //unset($groupemots[count($groupemots)-1]); str_replace($caracexclus, ' ', strtolower($value));
 
             foreach ($groupemots as $value2) {
-                 
+                 //print_r($value2);
                 foreach ($value2 as $value3) {
+
                     $value3 = trim($value3);
+                    $value3 = utf8_encode($value3);
                     if(strlen($value3)>3){
-                        $mots[] = $value3;
+                        if(!in_array($value3, $motsaexclures) && !in_array($value3, $caracexclus) ) {
+                            $mots[] = $value3;
                         //str_replace(' ', '.', $value3);
                         //echo $value3;
                         //echo strlen($value3);
+                        }
                     }
                 }
             }   
         }
         return $mots;
+        //print_r($mots);
 }
 
 

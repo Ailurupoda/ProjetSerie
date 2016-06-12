@@ -48,6 +48,20 @@ class ModelSeries extends Model {
         }
     }
 
+    public static function getIdSerieByTitle($data){
+        try{
+
+            $sql = "SELECT idSerie FROM series WHERE title = :idSerie";
+            $req = self::$pdo->prepare($sql);
+            // execution de la requete
+            $req->execute($data);
+            return $req->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la BDD keywords getIdWords");
+        }
+    } 
+
         public static function insertSubtitleSerie($data){
         try{
             /*$v = "(";

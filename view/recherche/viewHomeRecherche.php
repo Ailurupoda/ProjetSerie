@@ -1,26 +1,15 @@
  <?php  
 
-function viewR($cs){
-    foreach($cs as $r) {
-        $occ = $r->occ;
-        $titre = $r->titre;
 
-        echo <<< EOT
-        <li> 
-            Trouvé $occ fois dans la série $titre.
-        </li>
-EOT;
-    }
-}   
-    echo "<p>Recherche de series par mots clés: </p>"; ?>   
-	<form id="searchForm" name="moteurSubmit" method="GET" action="."> <?php //controller/ControllerRecherche.php ?>
-	        <input type="text" value="<?php if(isset($_GET['moteur'])) {echo htmlspecialchars($_GET['moteur']);} ?>" name="moteur" id="moteur" />
+    echo "<p>Recherche de séries par mots-clés: </p>"; ?>   
+    <form id="searchForm" name="moteurSubmit" method="GET" action="."> <?php //controller/ControllerRecherche.php ?>
+            <input type="text" value="<?php if(isset($_GET['moteur'])) {echo htmlspecialchars($_GET['moteur']);} ?>" name="moteur" id="moteur" />
 
-	        <input type="hidden" name="action" value="<?php echo($act) ?>" />
+            <input type="hidden" name="action" value="<?php echo($act) ?>" />
             <input type="hidden" name="controller" value="recherche" />   
-	        
-	        <input type="submit" value="Envoyer" />
-	</form>
+            
+            <input type="submit" value="Envoyer" />
+    </form>
 
 <?php
 
@@ -38,16 +27,16 @@ if (isset($_GET['moteur'])) {
 echo "<br/>";
 
 if (isset($_GET['action'])) {
- 	echo "action est à :  ".$_GET['action'];}
+    echo "action est à :  ".$_GET['action'];}
 echo "<br/>";
 
 if (isset($act)) {
-	echo "act est a : "; print_r ($act);
+    echo "act est a : "; print_r ($act);
 }else{echo "act non définie";}
 echo "<br/>";
 
 if (isset($pagetitle)) {
-	echo "pagetitle est a : "; print_r ($pagetitle);
+    echo "pagetitle est a : "; print_r ($pagetitle);
 }else{echo "pagetitle non définie";}
 */
 //END DEBUGG****************************************
@@ -92,16 +81,13 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
 3. Liste des mots et expressions de la requête (variable au choix...)
 */
     function affichage($requete, $nbResults, $mots) {
-	if($nbResults == 0) { // Si aucun résultat n'est retourné
-	    echo "<p>Aucun résultat, veuillez effectuer une autre recherche !</p>";	
+    if($nbResults == 0) { // Si aucun résultat n'est retourné
+        echo "<p>Aucun résultat, veuillez effectuer une autre recherche !</p>"; 
 
-	} else { // Sinon on affiche les résultats en boucle
+    } else { // Sinon on affiche les résultats en boucle
  
-        // Afficher le nombre de résultats
-	    $affichageResultats = new affichageResultats();
-	    echo $affichageResultats->nbResultats();
  
-	    while($key = $requete->fetch_assoc()) {
+        while($key = $requete->fetch_assoc()) {
                 // On encode chaque clé/valeur de résultats en UTF-8
                 foreach($key as $k => $v) {
                      $key[$k] = utf8_encode($v);
@@ -112,7 +98,7 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
 
                 $texte = "Le mot ";
                 $texte .= $key['word'];
-                $texte .= " à trouvées a été ";
+                $texte .= " à rechercher a été trouvé ";
                 $texte .= $key['nbOcc']." fois.<br/>";
 
                 /*
@@ -123,10 +109,10 @@ Fonction "callback" pour l'affichage des résultats (3 arguments obligatoires)
                 3. "exact" (la chaîne précise mise en gras) ou "total" (la chaîne précise + environnante en gras) -> "exact" par défaut
                 */
                 $surlignage = new surlignageMot($mots, $texte);
-                echo $surlignage->contenu; // Affichage du contenu après surlignage
+                //echo $surlignage->contenu; // Affichage du contenu après surlignage
                 // N.B. : echo $texte; si vous ne voulez pas de surlignage...
-	    } // Fin de la boucle while
-	}
+        } // Fin de la boucle while
+    }
     }
  
 // Nombre de résultats par "tranche d'affichage"
@@ -134,9 +120,9 @@ $limit = 10;
  
 // Numéro de page récupéré dynamiquement
 if(isset($_GET['p'])) {
-	$page = htmlspecialchars($_GET['p']);
+    $page = htmlspecialchars($_GET['p']);
 } else {
-	$page = 0;
+    $page = 0;
 }
  
 /*
@@ -174,27 +160,94 @@ $moteur->moteurPagination($page, 'p');
         if (isset($tab_rchch)&&!empty($tab_rchch)) {
             echo "<div>";
                 //var_dump($tab_rchch);
+
+
+                $tabSeries = [];
+
+
+
                 foreach ($tab_rchch as $motRecherche => $tabUneDimension) {
-                    echo "_________________________________________________<br/><br/>";
-                    echo "<ol>";
+                    //echo "_________________________________________________<br/><br/>";
+                    //echo "<ol>";
                     if (count($tabUneDimension)!=0) {
-                        echo "<b>".$motRecherche."</b> à été trouvé dans ".count($tabUneDimension)." séries : <br/>";
+                      //  echo "<b>".$motRecherche."</b> a été trouvé dans ".count($tabUneDimension)." séries : <br/>";
                         //var_dump($tabUneDimension);
                         //Le tableau est constitué d'objets de type stdclass                
                         foreach ($tabUneDimension as $valeur) {
-                            echo "<ul><li>";
+
+                            if(array_key_exists($valeur->titre, $tabSeries)){
+                                $tabSeries[$valeur->titre] = $tabSeries[$valeur->titre] + (int)$valeur->occ;
+                            }
+                            else{
+                                $tabSeries[$valeur->titre] = (int)$valeur->occ;
+                            }
+
+
+/*                            echo "<ul><li>";
                                 echo $valeur->occ;
                                 echo " fois dans ";
                                 echo $valeur->titre;
                                 echo "<br/>";
-                            echo "</li></ul>";
+                            echo "</li></ul>";*/
+
                         }
                     }else{
                         echo "<em><b>Erreur</b> : le mot <b>".$motRecherche."</b> n'a été trouvé dans aucune série.</em>";
                     }
-                    echo "</ol>";
+                  //  echo "</ol>";
                 }
+
+
+
+                echo count($tabSeries) . " résultat(s) trouvés";
+                echo "</br>";
                 echo "_________________________________________________";
+//                var_dump($tabSeries);
+                arsort($tabSeries);
+              //  var_dump($tabSeries);
+
+                echo "<ul>";
+                foreach ($tabSeries as $titre => $occ) {
+                    echo "<li>";
+
+                    echo $titre;
+
+
+                if (!empty($_SESSION['mail'])){
+
+                    require_once MODEL_PATH . 'ModelUsers.php';
+                    require_once MODEL_PATH . 'ModelLiked.php';
+                    require_once MODEL_PATH . 'ModelSeries.php';
+
+                    $data = array("mail" => $_SESSION['mail']);
+                    $i = ModelUsers::getId($data);
+                    $data = array(':idSerie' => $titre);
+                    $idS = ModelSeries::getIdSerieByTitle($data);
+
+                    $idS = $idS[0]['idSerie'];
+
+                    $data = array(
+                    "idUser" => $i["idUser"],
+                    "idSerie" => $idS
+                    );
+                    $exists = ModelLiked::existId($data);
+                    if($exists > 0){
+                        echo "<a href ='?action=unLike&controller=liked&idSerie=$idS'> UNLIKE</a>";
+                        
+                    }
+                    else {
+                        echo "<a href ='?action=like&controller=liked&idSerie=$idS'> LIKE</a>";
+                    }
+                
+                }
+
+
+
+                    echo "</li>";
+                }
+                echo "</ul>";
+
+
             echo "</div>";
         }else{
             echo "<br/><em>Erreur :</em> Aucune série correspondante.";
